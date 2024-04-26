@@ -4,25 +4,15 @@ import useRestaurantSearch from "../useRestaurantSearch";
 import { useStateValue } from "../StateProvider";
 import { Link } from "react-router-dom";
 import Search from "../components/Search";
-import SearchIcon from "@material-ui/icons/Search";
-
-import DescriptionIcon from "@material-ui/icons/Description";
-import ImageIcon from "@material-ui/icons/Image";
-import LocalOfferIcon from "@material-ui/icons/LocalOffer";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import RoomIcon from "@material-ui/icons/Room";
-
-import DirectionsIcon from "@material-ui/icons/Directions";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import { useHistory } from "react-router-dom";
 import { actionTypes } from "../reducer";
 import logo from "../logo.jpeg";
 
 function SearchPage() {
-  const [{ term }, dispatch] = useStateValue();
+  const [{ term, zipCode }, dispatch] = useStateValue();
 
   // LIVE API CALL
-  const { data } = useRestaurantSearch(term);
+  const { data } = useRestaurantSearch(term, zipCode);
   const history = useHistory();
 
   const recommend = (item) => {

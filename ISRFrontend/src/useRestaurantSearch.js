@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import apiResponse from "./apiResponse";
-function useRestaurantSearch(term) {
+function useRestaurantSearch(term, zipCode) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -13,12 +13,11 @@ function useRestaurantSearch(term) {
           // Create request body
           const requestBody = {
             query: term,
-            latitude: latitude,
-            longitude: longitude,
+            zipcode: zipCode
           };
 
           // Send POST request
-          const response = await fetch("your_post_api_url_here", {
+          const response = await fetch("http://127.0.0.1:5000/", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

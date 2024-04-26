@@ -14,6 +14,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         term: action.term,
+        zipCode : action.zipCode
       };
     case actionTypes.SET_RECOMMENDATION:
       return {

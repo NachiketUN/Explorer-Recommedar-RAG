@@ -8,25 +8,44 @@ import { useStateValue } from "../StateProvider";
 import { actionTypes } from "../reducer";
 
 function Search({ hideButtons = false }) {
-  const [{ term }, dispatch] = useStateValue();
+  const [{ term, zipCode }, dispatch] = useStateValue();
   const [input, setInput] = useState("");
+  const [zipInput, setZipInput] = useState("");
   const history = useHistory();
 
   const search = (e) => {
     e.preventDefault();
 
-    console.log("buttom clicked", input);
+    if (!input.trim() || !zipInput.trim()) {
+      // Check if either search term or ZIP code is empty
+      alert("Please enter both search term and ZIP code.");
+      return;
+    }
+
+    console.log("button clicked", input, zipInput);
 
     dispatch({
       type: actionTypes.SET_SEARCH_TERM,
       term: input,
+      zipCode: zipInput
     });
 
     history.push("/search");
   };
 
+  const handleZipChange = (e) => {
+    setZipInput(e.target.value);
+  };
+
   return (
     <form className="search">
+      <div className="search__input">
+        <input
+          placeholder="Enter ZIP code"
+          value={zipInput}
+          onChange={handleZipChange}
+        />
+      </div>
       <div className="search__input">
         <SearchIcon className="search__inputIcon" />
         <input value={input} onChange={(e) => setInput(e.target.value)} />
