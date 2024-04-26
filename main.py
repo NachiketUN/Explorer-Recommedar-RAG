@@ -2,6 +2,8 @@ import math
 import pandas as pd
 from rank_bm25 import BM25Okapi
 import numpy as np
+import requests
+
 
 
 def calculate_distance(lat1, lon1, lat2, lon2):
@@ -19,13 +21,33 @@ def get_documents_within_25miles(df, latitude, longitude):
     locations_within_25km = df[df.apply(lambda row: calculate_distance(latitude, longitude, row['latitude'], row['longitude']), axis=1) < 25]
     return locations_within_25km
 
+def get_lat_lon(zipcode, country="US"):
+    url = "https://nominatim.openstreetmap.org/search"
+    params = {
+        'postalcode': zipcode,
+        'country': country,
+        'format': 'json'
+    }
+    response = requests.get(url, params=params)
+    if response.status_code == 200:
+        data = response.json()
+        if data:
+            # Taking the first result as the most relevant one
+            latitude = data[0]['lat']
+            longitude = data[0]['lon']
+            return float(latitude), float(longitude)
+        else:
+            return None, None
+    else:
+        return None, None
 
-def retrieval_info(data, bm25, query, latitude ,longitude):
+def retrieval_info(data, bm25, query, zipcode):
     
     query_tokens = query.split(" ")
     # Get document scores
     doc_scores = bm25.get_scores(query_tokens)
     data['doc_scores'] = doc_scores
+    latitude, longitude = get_lat_lon(zipcode)
     
     docs = get_documents_within_25miles(data,latitude,longitude)
     

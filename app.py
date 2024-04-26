@@ -14,12 +14,10 @@ bm25 = BM25Okapi(tokenized_docs)
 def index():
     if request.method == 'POST':
         query = request.form['query']
-        latitude = request.form['latitude']
-        longitude = request.form['longitude']
+        zipcode = request.form['zipcode']
         print(query)
-        print(latitude)
-        print(longitude)
-        return retrieval_info(data,bm25, query,float(latitude),float(longitude))  
+        print(zipcode)
+        return retrieval_info(data,bm25, query,zipcode)  
     return render_template('index.html')
 
 @app.route('/search/', methods=['GET', 'POST'])
