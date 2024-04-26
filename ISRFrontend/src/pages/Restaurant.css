@@ -1,0 +1,164 @@
+:root {
+  --base-font-size: 16px;
+  --primary-color: #5a9eff; /* Cute pink color */
+  --secondary-color: #5ad67d; /* Cute green color */
+  --text-color: #555;
+  --accent-color: #007bff; /* Blue color */
+  --border-color: #ddd;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --background-color: #fff;
+  --border-left-color: #f0f0f0;
+  --block-color: #5a9eff;
+}
+
+html {
+  font-size: var(--base-font-size); /* Set the base font size */
+}
+
+.restaurant-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem; /* Add some space at the top */
+  border-left: 2rem;
+  border-right: 2rem;
+  margin-bottom: 3rem; /* Add some space at the bottom */
+}
+
+.restaurant-wrapper {
+  width: 100%;
+  max-width: 50rem; /* Adjust max-width as needed */
+  border-left: 1rem solid var(--border-left-color); /* Add left border */
+  border-right: 1rem solid var(--border-left-color); /* Add right border */
+  padding: 0 1rem; /* Add padding for space between border and content */
+}
+
+.restaurant {
+  border-radius: 0.5rem; /* Adjust border radius for card-like element */
+  overflow: hidden;
+  box-shadow: 0 4px 8px var(--shadow-color); /* Add shadow for depth */
+  margin-bottom: 1.5rem; /* Add space between restaurant and recommendations */
+  background-color: var(
+    --background-color
+  ); /* Background color for restaurant */
+  font-family: "Arial", sans-serif; /* Change font */
+  position: relative;
+}
+
+.restaurant-details {
+  padding: 1.5rem;
+}
+
+.restaurant-details h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: var(--primary-color); /* Cute pink color */
+}
+
+.category {
+  font-size: 1.25rem;
+  color: var(--secondary-color); /* Cute green color */
+}
+
+.headings {
+  font-size: 2rem;
+  color: var(--secondary-color); /* Cute green color */
+  margin-bottom: 0.75rem;
+}
+
+.headings-bottom {
+  font-size: 1.5rem;
+  padding-left: 1.25rem;
+  color: var(--secondary-color); /* Cute green color */
+  margin-bottom: 0.75rem;
+}
+
+.description {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+.restaurant ::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-color: var(
+    --block-color
+  ); /* Block color at the bottom of the card */
+}
+
+.recommendations {
+  width: 100%;
+  max-width: 50rem; /* Adjust max-width as needed */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  padding-bottom: 1.25rem; /* Add space at the bottom for scrolling */
+}
+
+.recommendation-items {
+  display: flex;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  width: calc(100% - 2rem); /* Set a fixed width */
+  margin: 0 auto; /* Center the container */
+}
+
+.recommendation-item {
+  flex: 0 0 auto; /* Prevent items from stretching */
+  margin-right: 1rem; /* Add space between recommendation items */
+  width: calc(50%);
+  border: 1px solid var(--border-color); /* Add border to each recommendation item */
+  border-radius: 0.5rem; /* Adjust border radius */
+  padding: 1rem; /* Add padding */
+  box-shadow: 0 4px 8px var(--shadow-color); /* Add shadow */
+  background-color: var(
+    --background-color
+  ); /* Background color for recommendation items */
+}
+
+.recommendation-item:last-child {
+  margin-right: 0; /* Remove margin from the last item */
+}
+
+.recommendation-item h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color); /* Cute pink color */
+}
+
+.recommendation-item .category {
+  font-size: 1rem;
+  color: var(--secondary-color); /* Cute green color */
+}
+
+.address {
+  margin-top: 0.25rem;
+  color: var(--text-color);
+}
+
+.rating {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.price {
+  font-size: 0.875rem;
+  color: var(--text-color);
+}
+.hours {
+  font-size: 0.875rem;
+  color: var(--text-color);
+}
+.misc {
+  font-size: 0.875rem;
+  color: var(--text-color);
+}
+.recommendation-item .recommendation-url {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--accent-color); /* Blue color */
+  text-decoration: none;
+}
