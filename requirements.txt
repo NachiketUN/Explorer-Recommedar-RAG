@@ -1,0 +1,5 @@
+pandas
+flask
+rank_bm25
+requests
+flask_cors
