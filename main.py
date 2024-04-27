@@ -52,10 +52,11 @@ def retrieval_info(data, bm25, query, zipcode):
     docs = get_documents_within_25miles(data,latitude,longitude)
     
     sorted_docs = docs.sort_values(by=['doc_scores', 'avg_rating'], ascending=[False, False])
-    # sorted_docs = sorted_docs.drop(columns=['doc_information', 'MISC','text'])
+    print(sorted_docs)
     top_10_docs = sorted_docs.head(10)
-    search_info = top_10_docs.to_dict(orient='records')
-
+    top_10_docs_list = top_10_docs.to_dict(orient='records')
+    search_info ={}
+    search_info['items']= top_10_docs_list
     return search_info
 
 def recommender_info(data, gmap_id):
@@ -63,9 +64,18 @@ def recommender_info(data, gmap_id):
     recommender_matrix = pd.read_pickle('recommendation.pickle')
     row = recommender_matrix.loc[gmap_id].to_list()
 
-    recom_info={}
+    search_data = data.loc[data['gmap_id'] == id].to_dict(orient= 'records')
+
+    recom_data = []
+
     for id in row:
-        recom_info[id] = data.loc[data['gmap_id'] == id]
+        filtered_row = data.loc[data['gmap_id'] == id]
+        filtered_row_dict = filtered_row.to_dict(orient='records')
+        recom_data.append(filtered_row_dict)
+    
+    recom_info ={}
+    recom_info['restaurantInfo'] = search_data
+    recom_info['recommendations'] = recom_data
 
     return recom_info
 
