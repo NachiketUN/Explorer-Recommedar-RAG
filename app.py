@@ -23,8 +23,8 @@ def index():
 @app.route('/search/', methods=['GET', 'POST'])
 def get_restaurant_info(restaurant_id):
     if request.method == 'POST':
-        return recommender_info(data, restaurant_id)  
-    return render_template('index.html')
+        return jsonify(recommender_info(data, restaurant_id)) 
+    
     
 if __name__ == '__main__':
     app.run(debug=True)
