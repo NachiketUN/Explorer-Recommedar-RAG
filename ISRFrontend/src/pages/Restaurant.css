@@ -17,32 +17,27 @@ html {
 
 .restaurant-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 3rem; /* Add some space at the top */
-  border-left: 2rem;
-  border-right: 2rem;
-  margin-bottom: 3rem; /* Add some space at the bottom */
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  height: calc(100vh - 6rem); /* Set height to fill the viewport minus top and bottom margins */
+  overflow-y: auto;
 }
 
 .restaurant-wrapper {
-  width: 100%;
-  max-width: 50rem; /* Adjust max-width as needed */
-  border-left: 1rem solid var(--border-left-color); /* Add left border */
-  border-right: 1rem solid var(--border-left-color); /* Add right border */
-  padding: 0 1rem; /* Add padding for space between border and content */
+  width: 70%;
+  padding: 0 1rem;
+  flex-grow: 1;
+  display: flex;
 }
 
 .restaurant {
-  border-radius: 0.5rem; /* Adjust border radius for card-like element */
-  overflow: hidden;
-  box-shadow: 0 4px 8px var(--shadow-color); /* Add shadow for depth */
-  margin-bottom: 1.5rem; /* Add space between restaurant and recommendations */
-  background-color: var(
-    --background-color
-  ); /* Background color for restaurant */
-  font-family: "Arial", sans-serif; /* Change font */
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  margin-bottom: 1.5rem;
+  background-color: var(--background-color);
+  font-family: "Arial", sans-serif;
   position: relative;
+  flex: 1;
 }
 
 .restaurant-details {
@@ -92,34 +87,22 @@ html {
 }
 
 .recommendations {
-  width: 100%;
-  max-width: 50rem; /* Adjust max-width as needed */
-  overflow-x: auto; /* Enable horizontal scrolling */
-  padding-bottom: 1.25rem; /* Add space at the bottom for scrolling */
+  width: 50%;
+  padding-left: 1rem;
+  overflow-y: auto;
 }
 
 .recommendation-items {
   display: flex;
-  overflow-x: auto; /* Enable horizontal scrolling */
-  width: calc(100% - 2rem); /* Set a fixed width */
-  margin: 0 auto; /* Center the container */
+  flex-direction: column;
 }
 
 .recommendation-item {
-  flex: 0 0 auto; /* Prevent items from stretching */
-  margin-right: 1rem; /* Add space between recommendation items */
-  width: calc(50%);
-  border: 1px solid var(--border-color); /* Add border to each recommendation item */
-  border-radius: 0.5rem; /* Adjust border radius */
-  padding: 1rem; /* Add padding */
-  box-shadow: 0 4px 8px var(--shadow-color); /* Add shadow */
-  background-color: var(
-    --background-color
-  ); /* Background color for recommendation items */
-}
-
-.recommendation-item:last-child {
-  margin-right: 0; /* Remove margin from the last item */
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  background-color: var(--background-color);
+  font-family: "Arial", sans-serif;
 }
 
 .recommendation-item h3 {
