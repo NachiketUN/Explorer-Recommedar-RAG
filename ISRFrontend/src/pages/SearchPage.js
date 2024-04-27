@@ -15,6 +15,7 @@ function SearchPage() {
   const { data } = useRestaurantSearch(term, zipCode);
   const history = useHistory();
 
+  console.log(term)
   const recommend = (item) => {
     // Logic for recommending the item
     console.log("Item recommended:", item.gmap_id);
@@ -22,7 +23,6 @@ function SearchPage() {
       type: actionTypes.SET_RECOMMENDATION,
       gmap_id: item.gmap_id,
     });
-
     history.push("/recommendation/" + item.name);
   };
 
@@ -39,7 +39,7 @@ function SearchPage() {
       {term && (
         <div className="searchPage__results">
           <p className="searchPage__resultCount">
-            {data === null ? "Loading..." : ""}
+            {data === null ? `Loading results for "${term}" near ZIP code: ${zipCode}...` : `Results for "${term}" near ZIP code: ${zipCode}`}
           </p>
           {data?.items.map((item, index) => (
             <div className="searchPage__result" key={index}>
