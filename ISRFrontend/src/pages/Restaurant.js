@@ -6,14 +6,14 @@ import "./Restaurant.css";
 function Restaurant() {
   // Dummy data for restaurant recommendations
   const [{ recommendFor }, dispatch] = useStateValue();
-  const { data } = useRecommendation(recommendFor);
+  const { recData } = useRecommendation(recommendFor);
 
-  if (!data) {
+  if (!recData) {
     return <div>Loading...</div>;
   }
 
-  const restaurant1 = data.restaurantInfo;
-  const recommendations = data.recommendations;
+  const restaurant1 = recData.restaurantInfo;
+  const recommendations = recData.recommendations;
 
   return (
     <div className="restaurant-container">
@@ -64,11 +64,11 @@ function Restaurant() {
       <div className="recommendations">
         <h2 className="headings-bottom">Restaurant Recommendations</h2>
         <div className="recommendation-items">
-          {recommendations.map((recommendation, index) => (
+          {recommendations && recommendations.map((recommendation, index) => (
             <div className="recommendation-item" key={index}>
               <h3>{recommendation.name}</h3>
               <p className="category">
-                Category: {recommendation.category.join(", ")}
+                {Array.isArray(recommendation.category) && recommendation.category.length > 1 ? recommendation.category.join(", ") : recommendation.category}
               </p>
               <p className="address">{recommendation.address}</p>
               <p className="rating">
@@ -76,14 +76,16 @@ function Restaurant() {
                 {recommendation.num_of_reviews} reviews)
               </p>
               <p className="price">Price: {recommendation.price}</p>
-              <a
-                className="recommendation-url"
-                href={recommendation.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View Details
-              </a>
+              {recommendation.url && (
+                <a
+                  className="recommendation-url"
+                  href={recommendation.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Details
+                </a>
+              )}
             </div>
           ))}
         </div>

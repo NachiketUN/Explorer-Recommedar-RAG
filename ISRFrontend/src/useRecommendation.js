@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 import recommendationResponse from "./recommendationResponse";
 function useRecommendation(recommendFor) {
-  const [data, setData] = useState(null);
+  const [recData, setRecData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,34 +14,23 @@ function useRecommendation(recommendFor) {
         };
 
         // Send POST request
-        const response = await fetch("your_post_api_url_here_2", {
-          method: "POST",
+        const response = await axios.post("http://127.0.0.1:5000/search", requestBody, {
           headers: {
             "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestBody),
+          }
         });
-
-        if (!response.ok) {
-          console.error(
-            "Error fetching data using sample response:",
-            recommendationResponse
-          );
-          setData(recommendationResponse);
-        } else {
-          const result = await response.json();
-          setData(result);
-        }
+        setRecData(response.data);
+        
       } catch (error) {
         console.error("Error fetching data using sample response:", error);
-        setData(recommendationResponse);
+        setRecData(recommendationResponse);
       }
     };
 
     fetchData();
   }, [recommendFor]);
 
-  return { data };
+  return { recData };
 }
 
 export default useRecommendation;

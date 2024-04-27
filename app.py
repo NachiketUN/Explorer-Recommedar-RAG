@@ -20,10 +20,10 @@ def index():
         zipcode = request.json["zipcode"]
         return jsonify(retrieval_info(data,bm25, query,zipcode))
 
-@app.route('/search/', methods=['GET', 'POST'])
-def get_restaurant_info(restaurant_id):
+@app.route('/search', methods=['POST'])
+def get_restaurant_info():
     if request.method == 'POST':
-        return jsonify(recommender_info(data, restaurant_id)) 
+        return jsonify(recommender_info(data,request.json["gmap_id"])) 
     
     
 if __name__ == '__main__':

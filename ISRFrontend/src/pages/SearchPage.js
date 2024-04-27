@@ -26,7 +26,6 @@ function SearchPage() {
     history.push("/recommendation/" + item.name);
   };
 
-  console.log(data);
   return (
     <div className="searchPage">
       <div className="searchPage__header">
@@ -40,12 +39,10 @@ function SearchPage() {
       {term && (
         <div className="searchPage__results">
           <p className="searchPage__resultCount">
-            About {data?.searchInformation.totalResults} results (
-            {data?.searchInformation.searchTime} seconds) for {term}
+            {data === null ? "Loading..." : ""}
           </p>
-
-          {data?.items.map((item) => (
-            <div className="searchPage__result">
+          {data?.items.map((item, index) => (
+            <div className="searchPage__result" key={index}>
               <div
                 className="searchPage__resultTitle"
                 onClick={() => recommend(item)}

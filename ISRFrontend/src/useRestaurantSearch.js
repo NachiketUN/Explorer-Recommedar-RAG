@@ -1,49 +1,34 @@
 import { useState, useEffect } from "react";
-import apiResponse from "./apiResponse";
+import axios from "axios"; // Import Axios
+
 function useRestaurantSearch(term, zipCode) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Get current location
-        navigator.geolocation.getCurrentPosition(async (position) => {
-          const { latitude, longitude } = position.coords;
+        // Create request body
+        const requestBody = {
+          query: term,
+          zipcode: zipCode
+        };
 
-          // Create request body
-          const requestBody = {
-            query: term,
-            zipcode: zipCode
-          };
-
-          // Send POST request
-          const response = await fetch("http://127.0.0.1:5000/", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestBody),
-          });
-
-          if (!response.ok) {
-            console.error(
-              "Error fetching data using sample response:",
-              apiResponse
-            );
-            setData(apiResponse);
-          } else {
-            const result = await response.json();
-            setData(result);
+        // Send POST request using Axios
+        const response = await axios.post("http://127.0.0.1:5000/", requestBody, {
+          headers: {
+            "Content-Type": "application/json",
           }
         });
+        // Set data to response data
+        setData(response.data);
       } catch (error) {
-        console.error("Error fetching data using sample response:", error);
-        setData(apiResponse);
+        console.error("Error fetching data:", error);
+        // Handle error as needed
       }
     };
 
     fetchData();
-  }, [term]);
+  }, [term, zipCode]); // Add zipCode to the dependency array since it's used in fetchData
 
   return { data };
 }
