@@ -18,7 +18,7 @@ def index():
     if request.method == 'POST':
         query = request.json["query"]
         zipcode = request.json["zipcode"]
-        return jsonify(retrieval_info(data,bm25, query,zipcode))
+        return jsonify(retrieval_info(data, bm25, query,zipcode))
 
 @app.route('/search', methods=['POST'])
 def get_restaurant_info():

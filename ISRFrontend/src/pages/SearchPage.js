@@ -33,7 +33,7 @@ function SearchPage() {
           <img className="searchPage__logo" src={logo} alt="" />
         </Link>
         <div className="searchPage__headerBody">
-          <Search hideButtons />
+          <Search hideButtons initialInput={term} initialZip={zipCode} />
         </div>
       </div>
       {term && (
