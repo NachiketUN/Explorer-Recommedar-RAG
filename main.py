@@ -3,7 +3,7 @@ import pandas as pd
 from rank_bm25 import BM25Okapi
 import numpy as np
 import requests
-
+from llm_functions import *
 
 
 def calculate_distance(lat1, lon1, lat2, lon2):
@@ -60,7 +60,7 @@ def retrieval_info(data, bm25, query, zipcode):
     search_info['items'] = top_10_docs_list
     return search_info
 
-def recommender_info(data, gmap_id):
+def recommender_info(llm, data, gmap_id):
     recommender_matrix = pd.read_pickle('recommendation.pickle')
 
     row = recommender_matrix.loc[gmap_id].to_list()
@@ -74,10 +74,18 @@ def recommender_info(data, gmap_id):
         filtered_row.fillna(' ',inplace=True)
         filtered_row_dict = filtered_row.to_dict(orient='records')
         recom_data.append(filtered_row_dict[0])
+
+    prompt_template = """Write a concise summary of the following:
+    "{text}"
+    CONCISE SUMMARY: """
+
+    llm_chain = LLMChain(llm=llm, prompt=PromptTemplate.from_template(prompt_template))
+    summary = llm_chain.run({"text": row['doc_information']})
     
     recom_info ={}
     recom_info['restaurantInfo'] = search_data[0]
     recom_info['recommendations'] = recom_data
+    recom_info['summary'] = summary
 
     return recom_info
 
