@@ -70,7 +70,7 @@ def recommender_info(data, gmap_id):
     recom_data = []
 
     for id in row:
-        filtered_row = data.loc[data['gmap_id'] == gmap_id]
+        filtered_row = data.loc[data['gmap_id'] == id]
         filtered_row.fillna(' ',inplace=True)
         filtered_row_dict = filtered_row.to_dict(orient='records')
         recom_data.append(filtered_row_dict[0])
