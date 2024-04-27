@@ -61,8 +61,8 @@ def retrieval_info(data, bm25, query, zipcode):
     return search_info
 
 def recommender_info(data, gmap_id):
-
     recommender_matrix = pd.read_pickle('recommendation.pickle')
+
     row = recommender_matrix.loc[gmap_id].to_list()
 
     search_data = data.loc[data['gmap_id'] == gmap_id].to_dict(orient= 'records')

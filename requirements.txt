@@ -3,3 +3,8 @@ flask
 rank_bm25
 requests
 flask_cors
+langchain-openai 
+tiktoken 
+chromadb 
+langchain 
+langchainhub
