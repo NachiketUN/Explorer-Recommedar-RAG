@@ -66,7 +66,7 @@ def recommender_info(llm, data, gmap_id):
     row = recommender_matrix.loc[gmap_id].to_list()
 
     search_data = data.loc[data['gmap_id'] == gmap_id].to_dict(orient= 'records')
-
+    doc = data.loc[data['gmap_id'] == gmap_id, 'doc_information'].iloc[0]
     recom_data = []
 
     for id in row:
@@ -78,9 +78,8 @@ def recommender_info(llm, data, gmap_id):
     prompt_template = """Write a concise summary of the following:
     "{text}"
     CONCISE SUMMARY: """
-
     llm_chain = LLMChain(llm=llm, prompt=PromptTemplate.from_template(prompt_template))
-    summary = llm_chain.run({"text": row['doc_information']})
+    summary = llm_chain.run({"text": doc})
     
     recom_info ={}
     recom_info['restaurantInfo'] = search_data[0]

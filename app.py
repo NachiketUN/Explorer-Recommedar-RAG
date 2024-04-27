@@ -14,9 +14,9 @@ data = pd.read_pickle('restaurent_docs.pickle')
 documents = data['doc_information'].to_list()
 tokenized_docs = [doc.split(" ") for doc in documents]
 bm25 = BM25Okapi(tokenized_docs)
-# global api_key 
-# api_key = os.environ["OPENAI_API_KEY"]
-# llm = ChatOpenAI(openai_api_key=api_key, temperature=0, model_name="gpt-3.5-turbo-1106")
+global api_key 
+api_key = os.environ["OPENAI_API_KEY"]
+llm = ChatOpenAI(openai_api_key=api_key, temperature=0, model_name="gpt-3.5-turbo-1106")
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
