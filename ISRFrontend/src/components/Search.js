@@ -40,16 +40,16 @@ function Search({ hideButtons = false }) {
   return (
     <form className="search">
       <div className="search__input">
+        <SearchIcon className="search__inputIcon" />
+        <input value={input} onChange={(e) => setInput(e.target.value)} />
+        <MicIcon />
+      </div>
+      <div className="search__input">
         <input
           placeholder="Enter ZIP code"
           value={zipInput}
           onChange={handleZipChange}
         />
-      </div>
-      <div className="search__input">
-        <SearchIcon className="search__inputIcon" />
-        <input value={input} onChange={(e) => setInput(e.target.value)} />
-        <MicIcon />
       </div>
       {!hideButtons ? (
         <div className="search__buttons">
