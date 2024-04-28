@@ -22,24 +22,32 @@ function SearchPage() {
   useEffect(() => {
     if (data) {
       setIsLoading(true);
-      fetchChatData();
+      fetchChatData(data);
     }
   }, [data]);
 
-  const fetchChatData = async () => {
+  const fetchChatData = async (jsonData) => { 
     try {
-      const response = await fetch("http://127.0.0.1:5000/chat-data");
+      const url = `http://127.0.0.1:5000/chat-data`;
+      const response = await fetch(url, {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ meta: jsonData }), 
+      });
       if (!response.ok) {
         throw new Error("Failed to fetch chat data");
       }
-      const data = await response.json();
-      setChatMessages(data.messages);
+      const responseData = await response.json(); 
+      setChatMessages(responseData.messages);
     } catch (error) {
       console.error("Error fetching chat data:", error);
     } finally {
       setIsLoading(false);
     }
   };
+  
 
 
   console.log(term)

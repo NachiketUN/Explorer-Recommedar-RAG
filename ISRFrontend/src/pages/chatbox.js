@@ -14,7 +14,7 @@ function ChatBox({ messages }) {
       } else {
         clearInterval(interval);
       }
-    }, 1000); // Adjust the typing speed here (milliseconds per character)
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [messages, typedMessages]);
@@ -22,7 +22,7 @@ function ChatBox({ messages }) {
   return (
     <div className="chatBox">
       <div className="chatBox__header">
-        <h3>Chat</h3>
+        <h3>Retrieval Augmented Generation</h3>
       </div>
       <div className="chatBox__messages">
         {typedMessages.map((message, index) => (

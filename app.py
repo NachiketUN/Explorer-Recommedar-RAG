@@ -29,7 +29,6 @@ ensemble_retriever = EnsembleRetriever(
 )
 
 recommender_data = pd.read_pickle('recommendation_1.pickle')
-#comverting the docs into lists for BM25 
 # documents = data['doc_information'].to_list()
 # tokenized_docs = [doc.split(" ") for doc in documents]
 # bm25 = BM25Okapi(tokenized_docs)
@@ -43,7 +42,8 @@ def index():
     if request.method == 'POST':
         query = request.json["query"]
         zipcode = request.json["zipcode"]
-        return jsonify(retrieval_info(data, bm25, query,zipcode))
+        # return jsonify(retrieval_info(data, bm25, query,zipcode))
+        return jsonify(ensemble(llm,ensemble_retriever, query,zipcode))
 
 @app.route('/search', methods=['POST'])
 def get_restaurant_info():
@@ -65,15 +65,20 @@ def get_ensemble():
         zipcode = request.json["zipcode"]
         return jsonify(ensemble(llm,ensemble_retriever, query,zipcode))
     
-@app.route("/chat-data")
+@app.route("/chat-data", methods=['POST'])
 def get_chat_data():
-    # Dummy data for demonstration purposes
-    chat_data = [
-        {"text": "Hello!", "type": "user"},
-        {"text": "Hi there!", "type": "user"},
-    ]
-    # Return the chat data as JSON
-    return jsonify({"messages": chat_data})
+    if request.method == 'POST':
+        meta = request.json["meta"]
+        print(meta['items'])
+        rag_output = rag(llm,meta['items'])
+        
+        chat_data = [
+            {"text": "Here's more about your results", "type": "bot"},
+            {"text": rag_output, "type": "user"},
+            
+        ]
+        # Return the chat data as JSON
+        return jsonify({"messages": chat_data})
     
     
 if __name__ == '__main__':
