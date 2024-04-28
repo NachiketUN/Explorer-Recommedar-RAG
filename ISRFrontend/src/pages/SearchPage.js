@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Search from "../components/Search";
 import { useHistory } from "react-router-dom";
 import { actionTypes } from "../reducer";
-import logo from "../logo.jpeg";
+import logo from "../logo_one.png";
 
 function SearchPage() {
   const [{ term, zipCode }, dispatch] = useStateValue();

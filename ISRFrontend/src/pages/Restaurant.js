@@ -13,6 +13,7 @@ function Restaurant() {
 
   const restaurant1 = recData.restaurantInfo;
   const recommendations = recData.recommendations;
+  const summary = recData.summary;
 
   return (
     <div className="restaurant-container">
@@ -60,9 +61,14 @@ function Restaurant() {
           </div>
         </div>
       </div>
+      <div className="summary-container">
+        <p>
+                Summary: {summary}
+        </p>
+      </div>
 
       <div className="recommendations">
-        <h2 className="headings-bottom">Restaurant Recommendations</h2>
+        <h2 className="headings-now">Restaurant Recommendations</h2>
         <div className="recommendation-items">
           {recommendations &&
             recommendations.map((recommendation, index) => (

@@ -1,13 +1,18 @@
+.searchPage {
+  background-color: #e7e5d6; /* Your desired background color */
+}
+
 .searchPage__header {
   display: flex;
   position: sticky;
   top: 0;
-  left: 0; /* Add left: 0 to stick the header to the left */
-  right: 0; /* Add right: 0 to stick the header to the right */
-  background-color: white;
+  left: 0;
+  right: 0;
+  bottom: 0; /* Set bottom to 0 to remove the bottom space */
+  background-color: #e7e5d6;
   align-items: flex-start;
-  padding: 30px;
-  border-bottom: 1px solid lightgray;
+  padding: 5px;
+  margin-bottom: -1px; /* Negative margin to counteract the border */
 }
 
 .searchPage__logo {
@@ -17,7 +22,8 @@
 }
 
 .searchPage__headerBody > .search > .search__input {
-  margin-top: 2.4rem;
+  margin-top: 0.4rem;
+  border-bottom: 0;
 }
 
 .searchPage_options {

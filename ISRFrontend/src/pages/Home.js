@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import AppsIcon from "@material-ui/icons/Apps";
 import { Avatar } from "@material-ui/core";
 import Search from "../components/Search";
-import logo from "../logo.jpeg";
+import logo from "../logo_one.png";
 
 function Home() {
   return (
@@ -20,3 +20,4 @@ function Home() {
 }
 
 export default Home;
+
