@@ -1,4 +1,5 @@
 import math 
+import json
 import pandas as pd
 from rank_bm25 import BM25Okapi
 import numpy as np
@@ -40,6 +41,27 @@ def get_lat_lon(zipcode, country="US"):
             return None, None
     else:
         return None, None
+
+def rag(llm,meta_list):
+    keys_to_keep = ['name','description','avg_rating','num_of_reviews','MISC']
+    modified_list_of_dicts = [{k: v for k, v in d.items() if k in keys_to_keep} for d in meta_list[:5]]
+
+    result = json.dumps(modified_list_of_dicts)
+    prompt_template = """Write a concise summary of the following restaurents:
+    "{text}"
+    CONCISE SUMMARY: """
+    llm_chain = LLMChain(llm=llm, prompt=PromptTemplate.from_template(prompt_template))
+    summary = llm_chain.run({"text": result})
+    return summary
+
+def ensemble(llm,retriever, query, zipcode):
+    docs = retriever.invoke(query)
+    meta_list = [doc.metadata for doc in docs]
+    # summary = rag(llm,meta_list)
+    search_info = {}
+    # search_info['summary'] = summary
+    search_info['items'] = meta_list
+    return search_info
 
 def retrieval_info(data, bm25, query, zipcode):
     
