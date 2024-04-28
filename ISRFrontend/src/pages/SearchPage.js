@@ -87,10 +87,10 @@ function SearchPage() {
               <p className="searchPage__resultSnippet">{item.description}</p>
             </div>
           ))}
+          {data && isLoading && <ChatBox messages={[{"text": "Loading...", "type": "bot"}]}/>}
+          {data && !isLoading && <ChatBox messages={chatMessages} />}
         </div>
       )}
-      {isLoading && <p>Loading chat data...</p>}
-      {!isLoading && <ChatBox messages={chatMessages} />}
     </div>
   );
 }
