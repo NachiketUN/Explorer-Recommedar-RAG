@@ -117,6 +117,9 @@ body {
   padding: 0 1rem; /* Add padding for spacing and styling */
   background-color: #e7e5d6; /* Add background color for the summary container */
   border-radius: 0.5rem; /* Add border radius for rounded corners */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  color: #4f4a3f; 
   overflow-y: auto;
 }
 
@@ -176,6 +179,12 @@ body {
   color: var(--text-color);
 }
 .misc {
+  font-size: 0.875rem;
+  color: var(--text-color);
+}
+
+.summary {
+  padding: 5px;
   font-size: 0.875rem;
   color: var(--text-color);
 }

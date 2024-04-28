@@ -62,9 +62,8 @@ function Restaurant() {
         </div>
       </div>
       <div className="summary-container">
-        <p>
-                Summary: {summary}
-        </p>
+        <h1>AI Generated Review Summarization </h1>
+        <p className="summary">{summary}</p>
       </div>
 
       <div className="recommendations">
