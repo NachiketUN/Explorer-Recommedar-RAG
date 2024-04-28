@@ -60,11 +60,8 @@ def retrieval_info(data, bm25, query, zipcode):
     search_info['items'] = top_10_docs_list
     return search_info
 
-def recommender_info(llm, data, gmap_id):
-    recommender_matrix = pd.read_pickle('recommendation.pickle')
-
-    row = recommender_matrix.loc[gmap_id].to_list()
-
+def recommender_info(llm, data,recommender_data, gmap_id):
+    row = recommender_data.loc[gmap_id].to_list()
     search_data = data.loc[data['gmap_id'] == gmap_id].to_dict(orient= 'records')
     doc = data.loc[data['gmap_id'] == gmap_id, 'doc_information'].iloc[0]
     recom_data = []

@@ -9,7 +9,8 @@ app = Flask(__name__)
 CORS(app)
 
 #Restaurant document data
-data = pd.read_pickle('restaurent_docs.pickle')
+data = pd.read_pickle('restaurent_docs_1.pickle')
+recommender_data = pd.read_pickle('recommendation_1.pickle')
 #comverting the docs into lists for BM25 
 documents = data['doc_information'].to_list()
 tokenized_docs = [doc.split(" ") for doc in documents]
@@ -17,6 +18,7 @@ bm25 = BM25Okapi(tokenized_docs)
 global api_key 
 api_key = os.environ["OPENAI_API_KEY"]
 llm = ChatOpenAI(openai_api_key=api_key, temperature=0, model_name="gpt-3.5-turbo-1106")
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -29,7 +31,7 @@ def index():
 def get_restaurant_info():
     if request.method == 'POST':
         print("hello")
-        return jsonify(recommender_info(llm, data,request.json["gmap_id"])) 
+        return jsonify(recommender_info(llm, data,recommender_data,request.json["gmap_id"])) 
     
 @app.route('/summary', methods=['POST'])
 def get_summary():
