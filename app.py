@@ -9,6 +9,7 @@ from langchain_community.document_loaders import DataFrameLoader
 from langchain_community.retrievers import BM25Retriever
 from langchain.retrievers import EnsembleRetriever
 
+import time
 
 
 app = Flask(__name__)
@@ -63,6 +64,17 @@ def get_ensemble():
         query = request.json["query"]
         zipcode = request.json["zipcode"]
         return jsonify(ensemble(llm,ensemble_retriever, query,zipcode))
+    
+@app.route("/chat-data")
+def get_chat_data():
+    # Dummy data for demonstration purposes
+    chat_data = [
+        {"text": "Hello!", "type": "user"},
+        {"text": "Hi there!", "type": "user"},
+    ]
+    # Return the chat data as JSON
+    return jsonify({"messages": chat_data})
+    
     
 if __name__ == '__main__':
     app.run(debug=True)

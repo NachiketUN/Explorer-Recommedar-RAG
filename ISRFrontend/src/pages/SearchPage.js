@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./SearchPage.css";
 import useRestaurantSearch from "../useRestaurantSearch";
 import { useStateValue } from "../StateProvider";
@@ -7,6 +7,7 @@ import Search from "../components/Search";
 import { useHistory } from "react-router-dom";
 import { actionTypes } from "../reducer";
 import logo from "../logo_one.png";
+import ChatBox from "./chatbox";
 
 function SearchPage() {
   const [{ term, zipCode }, dispatch] = useStateValue();
@@ -14,6 +15,32 @@ function SearchPage() {
   // LIVE API CALL
   const { data } = useRestaurantSearch(term, zipCode);
   const history = useHistory();
+
+  const [chatMessages, setChatMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (data) {
+      setIsLoading(true);
+      fetchChatData();
+    }
+  }, [data]);
+
+  const fetchChatData = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/chat-data");
+      if (!response.ok) {
+        throw new Error("Failed to fetch chat data");
+      }
+      const data = await response.json();
+      setChatMessages(data.messages);
+    } catch (error) {
+      console.error("Error fetching chat data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
 
   console.log(term)
   const recommend = (item) => {
@@ -54,6 +81,8 @@ function SearchPage() {
           ))}
         </div>
       )}
+      {isLoading && <p>Loading chat data...</p>}
+      {!isLoading && <ChatBox messages={chatMessages} />}
     </div>
   );
 }
