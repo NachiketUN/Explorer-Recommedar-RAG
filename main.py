@@ -53,7 +53,7 @@ def rag(llm,meta_list, query):
 
     result = json.dumps(modified_list_of_dicts)
     prompt_template = """You are a restaurent recommender system that help users to find restaurents that match their preferences. Based on search query, suggest three restaurents, with a description, rating or MISC etc and the reason why the user will like it (reason should loosely be based on query).
-    Your response should be concise with one restaurent on one line. Use the following pieces of context. 
+    Your response should be concise with one restaurent on one line. Use the following information for restaurants. 
     "{context}"
     Search Query: {query}
     Your Response: """
@@ -65,7 +65,6 @@ def rag(llm,meta_list, query):
     return summary
 
 def ensemble(llm,retriever, query, zipcode):
-    docs = retriever.invoke(query)
     docs = retriever.invoke(query)
     meta_dict = {}
 
