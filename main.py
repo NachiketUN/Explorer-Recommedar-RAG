@@ -117,7 +117,7 @@ def recommender_info(llm, data,recommender_data, gmap_id):
     "{text}"
     CONCISE SUMMARY: """
     llm_chain = LLMChain(llm=llm, prompt=PromptTemplate.from_template(prompt_template))
-    summary = llm_chain.run({"text": doc})
+    summary = llm_chain.run({"text": doc[:20000]})
     
     recom_info ={}
     recom_info['restaurantInfo'] = search_data[0]
