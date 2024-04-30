@@ -22,6 +22,11 @@ def get_documents_within_25miles(df, latitude, longitude):
     locations_within_25km = df[df.apply(lambda row: calculate_distance(latitude, longitude, row['latitude'], row['longitude']), axis=1) < 25]
     return locations_within_25km
 
+def distance_from_reference(location, zipcode):
+    latitude, longitude = get_lat_lon(zipcode)
+    return calculate_distance(latitude, longitude,
+                              location["latitude"], location["longitude"])
+
 def get_lat_lon(zipcode, country="US"):
     url = "https://nominatim.openstreetmap.org/search"
     params = {
@@ -42,25 +47,39 @@ def get_lat_lon(zipcode, country="US"):
     else:
         return None, None
 
-def rag(llm,meta_list):
+def rag(llm,meta_list, query):
     keys_to_keep = ['name','description','avg_rating','num_of_reviews','MISC']
     modified_list_of_dicts = [{k: v for k, v in d.items() if k in keys_to_keep} for d in meta_list[:5]]
 
     result = json.dumps(modified_list_of_dicts)
-    prompt_template = """Write a concise summary of the following restaurents:
-    "{text}"
-    CONCISE SUMMARY: """
+    prompt_template = """You are a restaurent recommender system that help users to find restaurents that match their preferences. Based on search query, suggest three restaurents, with a description, rating or MISC etc and the reason why the user will like it (reason should loosely be based on query).
+    Your response should be concise with one restaurent on one line. Use the following pieces of context. 
+    "{context}"
+    Search Query: {query}
+    Your Response: """
+    # PROMPT = PromptTemplate(
+    # template=prompt_template, input_variables=["context", "query"])
     llm_chain = LLMChain(llm=llm, prompt=PromptTemplate.from_template(prompt_template))
-    summary = llm_chain.run({"text": result})
+    summary = llm_chain.run({"context": result, "query": query})
+    # print(summary)
     return summary
 
 def ensemble(llm,retriever, query, zipcode):
     docs = retriever.invoke(query)
-    meta_list = [doc.metadata for doc in docs]
+    docs = retriever.invoke(query)
+    meta_dict = {}
+
+    for doc in docs:
+        gmap_id = doc.metadata["gmap_id"]
+        if gmap_id not in meta_dict:
+            meta_dict[gmap_id] = doc.metadata
+
+    meta_list = list(meta_dict.values())
     # summary = rag(llm,meta_list)
     search_info = {}
     # search_info['summary'] = summary
     search_info['items'] = meta_list
+    search_info['query'] = query
     return search_info
 
 def retrieval_info(data, bm25, query, zipcode):

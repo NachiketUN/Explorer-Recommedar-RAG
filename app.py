@@ -20,9 +20,12 @@ api_key = os.environ["OPENAI_API_KEY"]
 data = pd.read_pickle('restaurent_docs_1.pickle')
 loader = DataFrameLoader(data, page_content_column="doc_information")
 bm25 = BM25Retriever.from_documents(loader.load())
+bm25.k = 10
 embeddings = OpenAIEmbeddings(openai_api_key=api_key)
 vectordb = Chroma(persist_directory='./chroma_db_res2', embedding_function=embeddings)
-vector_retriever = vectordb.as_retriever(search_kwargs={"k": 5})
+# vector_retriever = vectordb.as_retriever(search_kwargs={"k": 5},search_type="mmr")
+
+vector_retriever = vectordb.as_retriever(search_kwargs={"k": 10})
 
 ensemble_retriever = EnsembleRetriever(
     retrievers=[bm25, vector_retriever], weights=[0.5, 0.5]
@@ -69,14 +72,16 @@ def get_ensemble():
 def get_chat_data():
     if request.method == 'POST':
         meta = request.json["meta"]
-        print(meta['items'])
-        rag_output = rag(llm,meta['items'])
+        rag_output = rag(llm,meta['items'], meta['query'])
+        # print(rag_output)
+        lines = rag_output.split('\n')
+        # print(lines)
         
         chat_data = [
-            {"text": "Here's more about your results", "type": "bot"},
-            {"text": rag_output, "type": "user"},
-            
+            {"text": "Here's more about your results", "type": "bot"}            
         ]
+        for line in lines:
+            chat_data.append({"text": line, "type": "user"})
         # Return the chat data as JSON
         return jsonify({"messages": chat_data})
     
