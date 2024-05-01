@@ -1,5 +1,5 @@
 # Explorer-Recommendar-RAG
-Ensemble Retrieval and RAG Application with integrated Recommender System. We make use of Google Local Data (2021).
+Ensemble Retrieval and RAG Application with integrated Recommender System. We make use of [Google Local Data (2021)] (https://datarepo.eng.ucsd.edu/mcauley_group/gdrive/googlelocal/).
 
 ## Prerequisites
 * OPENAI Key needs to be stored on your local machine https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety
