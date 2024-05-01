@@ -8,3 +8,4 @@ tiktoken
 chromadb 
 langchain 
 langchainhub
+langchain_community
