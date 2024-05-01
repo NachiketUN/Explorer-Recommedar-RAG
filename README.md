@@ -25,6 +25,13 @@ https://github.com/NachiketUN/Explorer-Recommedar-RAG/assets/20800501/feaf3d39-4
 * Please find the youtube video link to the demo here: https://www.youtube.com/watch?v=N-6beYfUSe0 (Doesn't capture the RAG part, watch the above video for complete features)
 * Please find the Slides of the ppt presented here: https://docs.google.com/presentation/d/1FfFlWg3EzzRg81_4jGaI1PYjUQa7wJ2o/edit?usp=sharing&ouid=118074924292755405095&rtpof=true&sd=true
 
+## Dataset Used
+* Google Local Data (2021) https://datarepo.eng.ucsd.edu/mcauley_group/gdrive/googlelocal/
+UCTopic: Unsupervised Contrastive Learning for Phrase Representations and Topic Mining
+Jiacheng Li, Jingbo Shang, Julian McAuley
+Annual Meeting of the Association for Computational Linguistics (ACL), 2022
+
+
 ## Contact Information
 
 * Email the team if you have any questions
@@ -36,9 +43,3 @@ https://github.com/NachiketUN/Explorer-Recommedar-RAG/assets/20800501/feaf3d39-4
                         Sirija: sirija@tamu.edu 
                         Rakesh Kumar Pothineni: rakeshpothineni@tamu.edu
 
-
-## Dataset Used
-* Google Local Data (2021) https://datarepo.eng.ucsd.edu/mcauley_group/gdrive/googlelocal/
-UCTopic: Unsupervised Contrastive Learning for Phrase Representations and Topic Mining
-Jiacheng Li, Jingbo Shang, Julian McAuley
-Annual Meeting of the Association for Computational Linguistics (ACL), 2022
