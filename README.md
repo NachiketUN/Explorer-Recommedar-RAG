@@ -26,5 +26,5 @@ Email the team if you have any questions
 - Contacts:
                 
                         Anirith Pampati: anirith@tamu.edu | text/call @ 9797210622
-                        Nachiketh nachiket@tamu.edu Sirija sirija@tamu.edu
+                        Nachiketh: nachiket@tamu.edu | Sirija: sirija@tamu.edu
                         Rakesh Kumar Pothineni: rakeshpothineni@tamu.edu
