@@ -20,7 +20,7 @@ https://github.com/NachiketUN/Explorer-Recommedar-RAG/assets/20800501/feaf3d39-4
 
 ## Links
 
-* Please find the youtube video link to the demo here: https://www.youtube.com/watch?v=N-6beYfUSe0
+* Please find the youtube video link to the demo here: https://www.youtube.com/watch?v=N-6beYfUSe0 (Doesn't capture the RAG part, watch the above video for complete features)
 * Please find the Slides of the ppt presented here: https://docs.google.com/presentation/d/1FfFlWg3EzzRg81_4jGaI1PYjUQa7wJ2o/edit?usp=sharing&ouid=118074924292755405095&rtpof=true&sd=true
 
 ## Contact Information
