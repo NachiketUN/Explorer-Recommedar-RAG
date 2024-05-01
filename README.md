@@ -11,7 +11,7 @@ Ensemble Retrieval and RAG Application with integrated Recommender System. We ma
 ## Getting Started
 * Install the python packages from requirements.txt
 * Install Node 12
-* To start the backend server run ``` python app.py```
+* To start the backend server run ``` python3 app.py```
 * To run React, cd into ISRFrontend Folder and run ``` npm start ```
 
 ## Links
