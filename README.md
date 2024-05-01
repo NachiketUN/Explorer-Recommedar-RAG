@@ -2,7 +2,8 @@
 Ensemble Retrieval and RAG Application with integrated Recommender System. We make use of [Google Local Data (2021)](https://datarepo.eng.ucsd.edu/mcauley_group/gdrive/googlelocal/).
 
 ## Prerequisites
-* OPENAI Key needs to be stored on your local machine https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety
+* OpenAI Key needs to be stored on your local machine https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety
+* Your OpenAI key should be stored in environment variable called 'OPENAI_API_KEY'
 * Two pickle files 1) restaurent_docs_1.pickle and 2) recommendation_1.pickle
 * Vector Store Folder "chroma_db_res2/"
 * Pickle files and Chroma DB folder can be downloaded from this Google Drive link https://drive.google.com/drive/u/0/folders/1GBzV1utUzSWzmdo6AV9cImv8XqJWwJJ3
