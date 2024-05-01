@@ -9,10 +9,10 @@ Ensemble Retrieval and RAG Application with integrated Recommender System. We ma
 
 
 ## Getting Started
-* Install the python packages from requirements.txt
+* Install the python packages from requirements.txt ```pip install -r requirements.txt```
 * Install Node 12
 * To start the backend server run ``` python3 app.py```
-* To run React, cd into ISRFrontend Folder and run ``` npm start ```
+* To run React, cd into ISRFrontend Folder and run ```npm install``` and ```npm start ```.
 
 https://github.com/NachiketUN/Explorer-Recommedar-RAG/assets/20800501/feaf3d39-4a73-4a95-83fe-df04c6652451
 
@@ -33,3 +33,10 @@ https://github.com/NachiketUN/Explorer-Recommedar-RAG/assets/20800501/feaf3d39-4
                         Nachiket Umesh Naganure: nachiket@tamu.edu
                         Sirija: sirija@tamu.edu 
                         Rakesh Kumar Pothineni: rakeshpothineni@tamu.edu
+
+
+  ### Dataset Used
+ Google Local Data (2021) https://datarepo.eng.ucsd.edu/mcauley_group/gdrive/googlelocal/
+UCTopic: Unsupervised Contrastive Learning for Phrase Representations and Topic Mining
+Jiacheng Li, Jingbo Shang, Julian McAuley
+Annual Meeting of the Association for Computational Linguistics (ACL), 2022
