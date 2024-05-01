@@ -36,8 +36,8 @@ https://github.com/NachiketUN/Explorer-Recommedar-RAG/assets/20800501/feaf3d39-4
                         Rakesh Kumar Pothineni: rakeshpothineni@tamu.edu
 
 
-  ### Dataset Used
- Google Local Data (2021) https://datarepo.eng.ucsd.edu/mcauley_group/gdrive/googlelocal/
+## Dataset Used
+* Google Local Data (2021) https://datarepo.eng.ucsd.edu/mcauley_group/gdrive/googlelocal/
 UCTopic: Unsupervised Contrastive Learning for Phrase Representations and Topic Mining
 Jiacheng Li, Jingbo Shang, Julian McAuley
 Annual Meeting of the Association for Computational Linguistics (ACL), 2022
